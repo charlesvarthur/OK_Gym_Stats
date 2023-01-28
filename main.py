@@ -42,6 +42,6 @@ sets = st.slider("Sets", 0, 30)
 
 
 if st.button("Add Data"):
-    get_data().append({'Date': curdate, "Exercise": exercise, "Weight": weight_kg, "Reps": reps, "Sets": sets}, ignore_index=True)
+    get_data().append({'Date': curdate, "Exercise": exercise, "Weight": weight_kg, "Reps": reps, "Sets": sets})
 
 st.write(pd.DataFrame(get_data()))
