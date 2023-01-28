@@ -16,6 +16,8 @@ statistics = pd.DataFrame({
     'Sets':[]
 })
 
+st.set_page_config(layout='wide')
+
 st.header('OK Gym Stats')
 
 st.write('This is a test page for OK GYM stats.')
