@@ -11,14 +11,16 @@ import altair as alt
 import matplotlib as mp
 import datetime as dt
 
-#Data Source
-statistics = pd.DataFrame({
-    'Date':[],
-    'Exercise':[],
-    'Weight':[],
-    'Reps':[],
-    'Sets':[]
-})
+# #Data Source
+# statistics = pd.DataFrame({
+#     'Date':[],
+#     'Exercise':[],
+#     'Weight':[],
+#     'Reps':[],
+#     'Sets':[]
+# })
+
+statistics = []
 
 @st.cache(allow_output_mutation=True)
 def get_data():
