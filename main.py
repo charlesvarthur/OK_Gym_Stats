@@ -19,6 +19,10 @@ statistics = pd.DataFrame({
     'Sets':[]
 })
 
+@st.cache(allow_output_mutation=True)
+def get_data():
+    return statistics
+
 #Page display config
 st.set_page_config(layout='wide')
 
@@ -28,3 +32,11 @@ st.header('OK Gym Stats')
 #Opening blurb
 st.write('This is a test page for OK GYM stats.')
 
+#User data inputs
+user_id = st.text_input("Exercise")
+weight_kg = st.slider("Weight in KG", 0, 100)
+reps = st.slider("Reps", 0, 50)
+sets = st.slider("Sets", 0, 30)
+
+# if st.button("Add row"):
+#     get_data().append({"UserID": user_id, "foo": foo, "bar": bar})
