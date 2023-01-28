@@ -4,3 +4,4 @@ numpy
 altair
 matplotlib
 streamlit_AgGrid
+datetime
