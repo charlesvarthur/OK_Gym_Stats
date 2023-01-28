@@ -20,11 +20,9 @@ import datetime as dt
 #     'Sets':[]
 # })
 
-statistics = []
-
 @st.cache(allow_output_mutation=True)
 def get_data():
-    return statistics
+    return []
 
 #Page display config
 st.set_page_config(layout='wide')
