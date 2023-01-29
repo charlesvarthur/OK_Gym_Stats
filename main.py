@@ -45,4 +45,7 @@ if st.button("Add Data"):
     get_data().append({'Date': curdate, "Exercise": exercise, "Weight": weight_kg, "Reps": reps, "Sets": sets})
 
 stats_df = pd.DataFrame(get_data())
+
+stats_df.to_csv(header=True,sep=','date_format='DD-MM-YYYY')
+
 st.write(stats_df)
