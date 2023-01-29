@@ -48,6 +48,7 @@ if st.button("Add Data"):
         st.write(stats_df)
         with open('https://1drv.ms/u/s!AvhIY7ZP-KoHd_LLMYlHMN-aTTQ?e=tGupcw', 'a') as f:
             stats_df.to_csv(f, header=False, sep=',')
+            f.close()
     except:
         print(Exception)    
 
