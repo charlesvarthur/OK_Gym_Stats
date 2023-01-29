@@ -11,14 +11,8 @@ import altair as alt
 import matplotlib as mp
 import datetime as dt
 
-# #Data Source
-# statistics = pd.DataFrame({
-#     'Date':[],
-#     'Exercise':[],
-#     'Weight':[],
-#     'Reps':[],
-#     'Sets':[]
-# })
+# Data Source
+stats_csv='https://onedrive.live.com/Edit.aspx?resid=7AAF84FB66348F8!119&wd=cpe&authkey=!APLLMYlHMN-aTTQ'
 
 @st.cache(allow_output_mutation=True)
 def get_data():
@@ -45,7 +39,6 @@ if st.button("Add Data"):
     get_data().append({'Date': curdate, "Exercise": exercise, "Weight": weight_kg, "Reps": reps, "Sets": sets})
     stats_df = pd.DataFrame(get_data())
     st.write(stats_df)
-    stats_csv='https://onedrive.live.com/Edit.aspx?resid=7AAF84FB66348F8!119&wd=cpe&authkey=!APLLMYlHMN-aTTQ'
     stats_df.to_csv(stats_csv, mode='a', header=False, sep=',')
 
 #Write the csv 
