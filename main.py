@@ -42,15 +42,12 @@ sets = st.slider("Sets", 0, 30)
 
 # Cache data for later
 if st.button("Add Data"):
-    try:
-        get_data().append({'Date': curdate, "Exercise": exercise, "Weight": weight_kg, "Reps": reps, "Sets": sets})
-        stats_df = pd.DataFrame(get_data())
-        st.write(stats_df)
-        with open('https://1drv.ms/u/s!AvhIY7ZP-KoHd_LLMYlHMN-aTTQ?e=tGupcw', 'a') as f:
-            stats_df.to_excel(f, sheet_name='Input', header=False, sep=',')
-            f.close()
-    except:
-        print(Exception)    
-
+    get_data().append({'Date': curdate, "Exercise": exercise, "Weight": weight_kg, "Reps": reps, "Sets": sets})
+    stats_df = pd.DataFrame(get_data())
+    st.write(stats_df)
+    with open('https://1drv.ms/u/s!AvhIY7ZP-KoHd_LLMYlHMN-aTTQ?e=tGupcw', 'a') as f:
+        stats_df.to_excel(f, sheet_name='Input', header=False, sep=',')
+        f.close()
+        
 #saved_data = pd.read_csv('https://raw.githubusercontent.com/charlesvarthur/OK_Gym_Stats/main/gym_stats.csv')
 #st.write(saved_data)
