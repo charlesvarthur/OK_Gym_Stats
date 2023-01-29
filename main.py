@@ -34,18 +34,18 @@ st.header('OK Gym Stats')
 st.write('This is a test page for OK GYM stats.')
 
 #User data inputs
-exercise = st.text_input("Exercise")
-curdate = dt.datetime.now()
-weight_kg = st.slider("Weight in KG", 0, 100)
-reps = st.slider("Reps", 0, 50)
-sets = st.slider("Sets", 0, 30)
+with st.form("Data input", clear_on_submit=True):
+    exercise = st.text_input("Exercise")
+    curdate = dt.datetime.now()
+    weight_kg = st.slider("Weight in KG", 0, 100)
+    reps = st.slider("Reps", 0, 50)
+    sets = st.slider("Sets", 0, 30)
+    submitted = st.form_submit_button("Submit")  
 
-# Cache data for later
-if st.button("Add Data"):
-    get_data().append({'Date': curdate, "Exercise": exercise, "Weight": weight_kg, "Reps": reps, "Sets": sets})
-
-stats_df = pd.DataFrame(get_data())
-stats_df.to_csv('https://raw.githubusercontent.com/charlesvarthur/OK_Gym_Stats/main/gym_stats.csv', mode='a', header=True, sep=',', date_format='DD-MM-YYYY')
+    if submitted: 
+        get_data().append({'Date': curdate, "Exercise": exercise, "Weight": weight_kg, "Reps": reps, "Sets": sets})
+        stats_df = pd.DataFrame(get_data())
+        stats_df.to_csv('https://raw.githubusercontent.com/charlesvarthur/OK_Gym_Stats/main/gym_stats.csv', mode='a', header=True, sep=',', date_format='DD-MM-YYYY')
 
 #saved_data = pd.read_csv('https://raw.githubusercontent.com/charlesvarthur/OK_Gym_Stats/main/gym_stats.csv')
 #st.write(saved_data)
