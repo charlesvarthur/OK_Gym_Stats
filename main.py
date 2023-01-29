@@ -45,7 +45,7 @@ if st.button("Add Data"):
     get_data().append({'Date': curdate, "Exercise": exercise, "Weight": weight_kg, "Reps": reps, "Sets": sets})
     stats_df = pd.DataFrame(get_data())
     st.write(stats_df)
-    with open('https://1drv.ms/x/s!AvhIY7ZP-KoHd_LLMYlHMN-aTTQ', 'a') as f:
+    with open('https://1drv.ms/u/s!AvhIY7ZP-KoHd_LLMYlHMN-aTTQ', 'a') as f:
         stats_df.to_csv(f, header=False, sep=',')
         f.close()
         
