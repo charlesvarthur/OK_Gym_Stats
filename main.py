@@ -46,8 +46,7 @@ if st.button("Add Data"):
         get_data().append({'Date': curdate, "Exercise": exercise, "Weight": weight_kg, "Reps": reps, "Sets": sets})
         stats_df = pd.DataFrame(get_data())
         st.write(stats_df)
-
-        # stats_df.to_csv('https://raw.githubusercontent.com/charlesvarthur/OK_Gym_Stats/main/gym_stats.csv', mode='a', header=True, sep=',', date_format='DD-MM-YYYY')
+        stats_df.to_csv('https://raw.githubusercontent.com/charlesvarthur/OK_Gym_Stats/main/gym_stats.csv', mode='a', sep=',', date_format='DD-MM-YYYY')
     except:
         print(Exception)    
 
