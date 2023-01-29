@@ -45,9 +45,8 @@ if st.button("Add Data"):
     get_data().append({'Date': curdate, "Exercise": exercise, "Weight": weight_kg, "Reps": reps, "Sets": sets})
     stats_df = pd.DataFrame(get_data())
     st.write(stats_df)
-    with open('https://onedrive.live.com/Edit.aspx?resid=7AAF84FB66348F8!119&wd=cpe&authkey=!APLLMYlHMN-aTTQ', 'a') as f:
-        stats_df.to_csv(f, header=False, sep=',')
-        f.close()
+    stats_csv='https://onedrive.live.com/Edit.aspx?resid=7AAF84FB66348F8!119&wd=cpe&authkey=!APLLMYlHMN-aTTQ'
+    stats_df.to_csv(stats_csv,vmode='a', header=False, sep=',')
         
 #saved_data = pd.read_csv('https://raw.githubusercontent.com/charlesvarthur/OK_Gym_Stats/main/gym_stats.csv')
 #st.write(saved_data)
