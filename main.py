@@ -46,7 +46,7 @@ if st.button("Add Data"):
     stats_df = pd.DataFrame(get_data())
     st.write(stats_df)
     with open('https://1drv.ms/x/s!AvhIY7ZP-KoHd_LLMYlHMN-aTTQ', 'a') as f:
-        stats_df.to_excel(f, sheet_name='Input', header=False, sep=',')
+        stats_df.to_csv(f, header=False, sep=',')
         f.close()
         
 #saved_data = pd.read_csv('https://raw.githubusercontent.com/charlesvarthur/OK_Gym_Stats/main/gym_stats.csv')
