@@ -47,6 +47,9 @@ if st.button("Add Data"):
     st.write(stats_df)
     stats_csv='https://onedrive.live.com/Edit.aspx?resid=7AAF84FB66348F8!119&wd=cpe&authkey=!APLLMYlHMN-aTTQ'
     stats_df.to_csv(stats_csv, mode='a', header=False, sep=',')
+
+#Write the csv 
+st.write(pd.DataFrame(stats_csv))
         
 #saved_data = pd.read_csv('https://raw.githubusercontent.com/charlesvarthur/OK_Gym_Stats/main/gym_stats.csv')
 #st.write(saved_data)
