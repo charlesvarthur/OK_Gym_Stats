@@ -47,4 +47,5 @@ if st.button("Add Data"):
 stats_df = pd.DataFrame(get_data())
 stats_df.to_csv('https://raw.githubusercontent.com/charlesvarthur/OK_Gym_Stats/main/gym_stats.csv', mode='a', header=True, sep=',', date_format='DD-MM-YYYY')
 
-st.write(stats_df)
+saved_data = pd.DataFrame('https://raw.githubusercontent.com/charlesvarthur/OK_Gym_Stats/main/gym_stats.csv')
+st.write(saved_data)
