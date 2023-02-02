@@ -12,6 +12,8 @@ import psycopg2 as pg
 from configparser import ConfigParser, Error
 import config
 
+
+#Function to read the database ini file and verify that the section for postgresql exists. 
 def config(filename='database.ini', section='postgresql'):
     # create a parser
     parser = ConfigParser()
@@ -29,6 +31,7 @@ def config(filename='database.ini', section='postgresql'):
 
     return db
 
+#Run a test connection for PostgreSQL and return the version data. 
 def connect():
     """ Connect to the PostgreSQL database server """
     conn = None
