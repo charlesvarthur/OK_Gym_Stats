@@ -1,7 +1,6 @@
 streamlit
 pandas
-numpy
 altair
 matplotlib
-streamlit_AgGrid
 datetime
+psycopg2
