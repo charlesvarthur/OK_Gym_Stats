@@ -9,35 +9,88 @@ import altair as alt
 import matplotlib as mp
 import datetime as dt
 import psycopg2 as pg
+from configparser import ConfigParser, Error
+import config
 
-# Data Source
-#stats_csv=pd.DataFrame('https://onedrive.live.com/Edit.aspx?resid=7AAF84FB66348F8!119&wd=cpe&authkey=!APLLMYlHMN-aTTQ')
+def config(filename='database.ini', section='postgresql'):
+    # create a parser
+    parser = ConfigParser()
+    # read config file
+    parser.read(filename)
 
-@st.cache(allow_output_mutation=True)
-def get_data():
-    return []
+    # get section, default to postgresql
+    db = {}
+    if parser.has_section(section):
+        params = parser.items(section)
+        for param in params:
+            db[param[0]] = param[1]
+    else:
+        raise Exception('Section {0} not found in the {1} file'.format(section, filename))
 
-#Page display config
-st.set_page_config(layout='wide')
+    return db
 
-#Header
-st.header('OK Gym Stats')
+def connect():
+    """ Connect to the PostgreSQL database server """
+    conn = None
+    try:
+        # read connection parameters
+        params = config()
 
-#Opening blurb
-st.write('This is a test page for OK GYM stats.')
+        # connect to the PostgreSQL server
+        print('Connecting to the PostgreSQL database...')
+        conn = pg.connect(**params)
+		
+        # create a cursor
+        cur = conn.cursor()
+        
+	# execute a statement
+        print('PostgreSQL database version:')
+        cur.execute('SELECT version()')
 
-#User data inputs
-exercise = st.text_input("Exercise")
-curdate = dt.datetime.now()
-weight_kg = st.slider("Weight in KG", 0, 100)
-reps = st.slider("Reps", 0, 50)
-sets = st.slider("Sets", 0, 30)
+        # display the PostgreSQL database server version
+        db_version = cur.fetchone()
+        print(db_version)
+       
+	# close the communication with the PostgreSQL
+        cur.close()
+    except (Exception, pg.DatabaseError) as error:
+        print(error)
+    finally:
+        if conn is not None:
+            conn.close()
+            print('Database connection closed.')
 
-# Cache data for later
-if st.button("Add Data"):
-    get_data().append({'Date': curdate, "Exercise": exercise, "Weight": weight_kg, "Reps": reps, "Sets": sets})
-    stats_df = pd.DataFrame(get_data())
-    st.write(stats_df)
+if __name__ == '__main__':
+    connect()
 
-#Write the csv 
-st.write(stats_df)
+# # Data Source
+# #stats_csv=pd.DataFrame('https://onedrive.live.com/Edit.aspx?resid=7AAF84FB66348F8!119&wd=cpe&authkey=!APLLMYlHMN-aTTQ')
+
+# @st.cache(allow_output_mutation=True)
+# def get_data():
+#     return []
+
+# #Page display config
+# st.set_page_config(layout='wide')
+
+# #Header
+# st.header('OK Gym Stats')
+
+# #Opening blurb
+# st.write('This is a test page for OK GYM stats.')
+
+# #User data inputs
+# exercise = st.text_input("Exercise")
+# curdate = dt.datetime.now()
+# weight_kg = st.slider("Weight in KG", 0, 100)
+# reps = st.slider("Reps", 0, 50)
+# sets = st.slider("Sets", 0, 30)
+
+# # Cache data for later
+# if st.button("Add Data"):
+#     get_data().append({'Date': curdate, "Exercise": exercise, "Weight": weight_kg, "Reps": reps, "Sets": sets})
+#     stats_df = pd.DataFrame(get_data())
+#     st.write(stats_df)
+
+# #Write the csv 
+# st.write(stats_df)
