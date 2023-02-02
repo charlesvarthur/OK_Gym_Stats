@@ -4,15 +4,14 @@
 
 #Import modules
 import streamlit as st
-from st_aggrid import AgGrid as aG
 import pandas as pd
-import numpy as np
 import altair as alt
 import matplotlib as mp
 import datetime as dt
+import psycopg2 as pg
 
 # Data Source
-stats_csv=pd.DataFrame('https://onedrive.live.com/Edit.aspx?resid=7AAF84FB66348F8!119&wd=cpe&authkey=!APLLMYlHMN-aTTQ')
+#stats_csv=pd.DataFrame('https://onedrive.live.com/Edit.aspx?resid=7AAF84FB66348F8!119&wd=cpe&authkey=!APLLMYlHMN-aTTQ')
 
 @st.cache(allow_output_mutation=True)
 def get_data():
@@ -39,10 +38,6 @@ if st.button("Add Data"):
     get_data().append({'Date': curdate, "Exercise": exercise, "Weight": weight_kg, "Reps": reps, "Sets": sets})
     stats_df = pd.DataFrame(get_data())
     st.write(stats_df)
-    stats_df.to_csv(stats_csv, mode='a', header=False, sep=',')
 
 #Write the csv 
-st.write(stats_csv)
-        
-#saved_data = pd.read_csv('https://raw.githubusercontent.com/charlesvarthur/OK_Gym_Stats/main/gym_stats.csv')
-#st.write(saved_data)
+st.write(stats_df)
