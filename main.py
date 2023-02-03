@@ -32,7 +32,7 @@ def config(filename='database.ini', section='postgresql'):
     return db
 
 #Run a test connection for PostgreSQL and return the version data. 
-def connect():
+def data_insert():
     """ Connect to the PostgreSQL database server """
     conn = None
     try:
@@ -46,13 +46,8 @@ def connect():
         # create a cursor
         cur = conn.cursor()
         
-	# execute a statement
-        print('PostgreSQL database version:')
-        cur.execute('SELECT version()')
-
-        # display the PostgreSQL database server version
-        db_version = cur.fetchone()
-        print(db_version)
+	# Insert Values
+        cur.execute("INSERT INTO exercises (col1, col2) VALUES (%s, %s, %s, %s, %s)", (curdate,exercise,weight_kg,reps,sets))
        
 	# close the communication with the PostgreSQL
         cur.close()
@@ -63,37 +58,33 @@ def connect():
             conn.close()
             print('Database connection closed.')
 
-if __name__ == '__main__':
-    connect()
+#Data Input and DB Write
+@st.cache(allow_output_mutation=True)
+def get_data():
+    return []
 
-# # Data Source
-# #stats_csv=pd.DataFrame('https://onedrive.live.com/Edit.aspx?resid=7AAF84FB66348F8!119&wd=cpe&authkey=!APLLMYlHMN-aTTQ')
+#Page display config
+st.set_page_config(layout='wide')
 
-# @st.cache(allow_output_mutation=True)
-# def get_data():
-#     return []
+#Header
+st.header('OK Gym Stats')
 
-# #Page display config
-# st.set_page_config(layout='wide')
+#Opening blurb
+st.write('This is a test page for OK GYM stats.')
 
-# #Header
-# st.header('OK Gym Stats')
+#User data inputs
+exercise = st.text_input("Exercise")
+curdate = dt.datetime.now()
+weight_kg = st.slider("Weight in KG", 0, 100)
+reps = st.slider("Reps", 0, 50)
+sets = st.slider("Sets", 0, 30)
 
-# #Opening blurb
-# st.write('This is a test page for OK GYM stats.')
+# Cache data for later
+if st.button("Add Data"):
+    get_data().append({'Date': curdate, "Exercise": exercise, "Weight": weight_kg, "Reps": reps, "Sets": sets})
+    stats_df = pd.DataFrame(get_data())
+    if __name__ == '__main__':
+       data_insert()
 
-# #User data inputs
-# exercise = st.text_input("Exercise")
-# curdate = dt.datetime.now()
-# weight_kg = st.slider("Weight in KG", 0, 100)
-# reps = st.slider("Reps", 0, 50)
-# sets = st.slider("Sets", 0, 30)
-
-# # Cache data for later
-# if st.button("Add Data"):
-#     get_data().append({'Date': curdate, "Exercise": exercise, "Weight": weight_kg, "Reps": reps, "Sets": sets})
-#     stats_df = pd.DataFrame(get_data())
-#     st.write(stats_df)
-
-# #Write the csv 
-# st.write(stats_df)
+#Write the csv 
+st.write(stats_df)
