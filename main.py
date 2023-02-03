@@ -85,6 +85,3 @@ if st.button("Add Data"):
     stats_df = pd.DataFrame(get_data())
     if __name__ == '__main__':
        data_insert()
-
-#Write the csv 
-st.write(stats_df)
