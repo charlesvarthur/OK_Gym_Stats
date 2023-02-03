@@ -10,6 +10,7 @@ import matplotlib as mp
 import datetime as dt
 import psycopg2 as pg
 from configparser import ConfigParser, Error
+import config
 
 #Run a test connection for PostgreSQL and return the version data. 
 def data_insert():
@@ -65,6 +66,3 @@ if st.button("Add Data"):
     stats_df = pd.DataFrame(get_data())
     if __name__ == '__main__':
        data_insert()
-
-#Write the csv 
-st.write(stats_df)
