@@ -4,3 +4,4 @@ altair
 matplotlib
 datetime
 psycopg2
+pg_config
