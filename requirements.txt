@@ -3,6 +3,5 @@ pandas
 altair
 matplotlib
 datetime
-psycopg2
 config
-postgresql
+psycopg2-binary
