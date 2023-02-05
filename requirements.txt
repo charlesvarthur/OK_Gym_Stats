@@ -1,7 +1,5 @@
 streamlit
 pandas
 altair
-matplotlib
 datetime
-config
 psycopg2-binary==2.9.5
