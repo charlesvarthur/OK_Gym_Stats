@@ -8,28 +8,17 @@ import pandas as pd
 import altair as alt
 import matplotlib as mp
 import datetime as dt
-import psycopg2 as pg
+import psycopg2
 from configparser import ConfigParser, Error
 import config
 
 
 #Function to read the database ini file and verify that the section for postgresql exists. 
-def config(filename=st.secrets, section='postgresql'):
-    # create a parser
-    parser = ConfigParser()
-    # read config file
-    parser.read(filename)
+@st.experimental_singleton
+def config():
+    return psycopg2.connect(**st.secrets["postgresql"])
 
-    # get section, default to postgresql
-    db = {}
-    if parser.has_section(section):
-        params = parser.items(section)
-        for param in params:
-            db[param[0]] = param[1]
-    else:
-        raise Exception('Section {0} not found in the {1} file'.format(section, filename))
-
-    return db
+conn = config()
 
 #Run a test connection for PostgreSQL and return the version data. 
 def data_insert():
