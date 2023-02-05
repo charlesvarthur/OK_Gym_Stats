@@ -21,8 +21,15 @@ conn = pg_config()
 
 def run_query(query):
     with conn.cursor() as cur:
-        cur.execute(query)
-        return cur.fetchall()
+        try:
+            cur.execute(query)
+            return cur.fetchall()
+        except (Exception, psycopg2.DatabaseError) as error:
+            print(error)
+        finally:
+            conn.close()
+            print('Database connection closed.')           
+            
 
 get_pgversion = run_query("Select version()")
 st.write(get_pgversion)
