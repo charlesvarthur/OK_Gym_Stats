@@ -19,7 +19,7 @@ def pg_config():
 
 conn = pg_config()
 
-def run_query(query)
+def run_query(query):
     try:
         with conn.cursor() as cur:
             cur.execute(query)
@@ -61,10 +61,10 @@ st.write(get_pgversion)
 #             conn.close()
 #             print('Database connection closed.')
 
-#Data Input and DB Write
-@st.cache(allow_output_mutation=True)
-def get_data():
-    return []
+# #Data Input and DB Write
+# @st.cache(allow_output_mutation=True)
+# def get_data():
+#     return []
 
 #Page display config
 st.set_page_config(layout='wide')
