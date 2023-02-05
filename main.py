@@ -19,14 +19,14 @@ def pg_config():
 
 conn = pg_config()
 
-def run_query(query):
-    with conn.cursor() as cur:
-        try:
+def run_query(query)
+    try:
+        with conn.cursor() as cur:
             cur.execute(query)
             return cur.fetchall()
-        except (Exception, psycopg2.DatabaseError) as error:
+    except (Exception, psycopg2.DatabaseError) as error:
             print(error)
-        finally:
+    finally:
             conn.close()
             print('Database connection closed.')           
             
