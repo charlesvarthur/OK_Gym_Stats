@@ -10,22 +10,22 @@ import datetime as dt
 import psycopg2
 
 #Function to read the database ini file and verify that the section for postgresql exists. 
-@st.experimental_singleton
-def pg_config():
-    return psycopg2.connect(**st.secrets["postgresql"])
+# @st.experimental_singleton
+# def pg_config():
+#     return psycopg2.connect(**st.secrets["postgresql"])
 
-conn = pg_config()
+# conn = pg_config()
 
-def run_query(query):
-    try:
-        with conn.cursor() as cur:
-            cur.execute(query)
-            return cur.fetchall()
-    except (Exception, psycopg2.DatabaseError) as error:
-            print(error)
-    finally:
-            conn.close()
-            print('Database connection closed.')           
+# def run_query(query):
+#     try:
+#         with conn.cursor() as cur:
+#             cur.execute(query)
+#             return cur.fetchall()
+#     except (Exception, psycopg2.DatabaseError) as error:
+#             print(error)
+#     finally:
+#             conn.close()
+#             print('Database connection closed.')           
             
 
 # get_pgversion = run_query("Select version()")
