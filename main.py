@@ -10,10 +10,18 @@ import datetime as dt
 import psycopg2
 import os
 
-
 DATABASE_URL = os.environ.get('DATABASE_URL')
 conn = psycopg2.connect(DATABASE_URL, sslmode='require')
 
+def get_version():
+    query = ("Select version()")
+    try:
+        with conn.cursor() as cur:
+            cur.execute(query)
+    except (Exception, psycopg2.DatabaseError) as error:
+            st.write(error)
+    finally:
+            conn.close()
 
 #Function to read the database ini file and verify that the section for postgresql exists local solution. 
 # @st.experimental_singleton
