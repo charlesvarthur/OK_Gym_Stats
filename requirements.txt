@@ -3,4 +3,3 @@ pandas
 altair
 datetime
 psycopg2-binary==2.9.5
-os
