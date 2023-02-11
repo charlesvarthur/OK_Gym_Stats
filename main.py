@@ -11,7 +11,7 @@ import psycopg2
 import os
 
 
-DATABASE_URL = os.environ['postgres://ipplgejjbvasoz:7adeec0f2bc57b89221ad0bea866b60b133847ca6e1232db9c04ac657a70ec3e@ec2-52-30-67-143.eu-west-1.compute.amazonaws.com:5432/d7tm7fo3jrpbcf']
+DATABASE_URL = ['postgres://ipplgejjbvasoz:7adeec0f2bc57b89221ad0bea866b60b133847ca6e1232db9c04ac657a70ec3e@ec2-52-30-67-143.eu-west-1.compute.amazonaws.com:5432/d7tm7fo3jrpbcf']
 conn = psycopg2.connect(DATABASE_URL, sslmode='require')
 
 
