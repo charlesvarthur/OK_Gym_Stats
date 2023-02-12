@@ -14,15 +14,7 @@ DATABASE_URL = os.environ.get('DATABASE_URL')
 conn = psycopg2.connect(DATABASE_URL, sslmode='require')
 
 def build():
-    queries = ['Select version();','SELECT current_database();', '''CREATE TABLE IF NOT EXISTS exercises (
-                id serial PRIMARY KEY,
-                exercise varchar(50) NOT NULL,
-                reps integer NOT NULL,
-                sets integer NOT NULL,
-                weight_kg integer NOT NULL,
-                exercise_date date
-                )      
-                ''']
+    queries = ['Select version();','SELECT current_database();']
     outputs = []
     try:
         with conn.cursor() as cur:
