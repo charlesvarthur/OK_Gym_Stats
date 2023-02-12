@@ -13,9 +13,17 @@ import os
 DATABASE_URL = os.environ.get('DATABASE_URL')
 conn = psycopg2.connect(DATABASE_URL, sslmode='require')
 
-def get_version():
-    queries = ['Select version();','SELECT current_database();']
-    query = ("Select version(); SELECT current_database();")
+def build():
+    queries = ['Select version();','SELECT current_database();', '''CREATE TABLE IF NOT EXISTS public.exercises(
+                id serial PRIMARY KEY,
+                exercise character varying(50) COLLATE pg_catalog."default" NOT NULL,
+                reps integer NOT NULL,
+                sets integer NOT NULL,
+                weight_kg integer NOT NULL,
+                exercise_date date,
+                CONSTRAINT exercises_pkey PRIMARY KEY (id)
+                )      
+                ''']
     outputs = []
     try:
         with conn.cursor() as cur:
@@ -27,34 +35,6 @@ def get_version():
             st.write(error)
     finally:
             conn.close()
-
-
-def create_tables():
-    create_qry=('''CREATE TABLE IF NOT EXISTS public.exercises(
-                id serial PRIMARY KEY,
-                exercise character varying(50) COLLATE pg_catalog."default" NOT NULL,
-                reps integer NOT NULL,
-                sets integer NOT NULL,
-                weight_kg integer NOT NULL,
-                exercise_date date,
-                CONSTRAINT exercises_pkey PRIMARY KEY (id)
-                )      
-                ''')
-    try:
-        with conn.cursor() as cur:
-            cur.execute(create_qry)
-    except (Exception, psycopg2.DatabaseError) as error:
-            st.write(error)
-    finally:
-            conn.close()   
-
-
-
-
-
-
-
-
 
 
 
@@ -125,9 +105,9 @@ weight_kg = st.slider("Weight in KG", 0, 100)
 reps = st.slider("Reps", 0, 50)
 sets = st.slider("Sets", 0, 30)
 
-st.subheader('Get DB Version')
-get_version()
-create_tables()
+st.subheader('Build returns')
+build()
+
 
 
 # Cache data for later
