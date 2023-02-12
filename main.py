@@ -16,12 +16,13 @@ conn = psycopg2.connect(DATABASE_URL, sslmode='require')
 def get_version():
     queries = ['Select version();','SELECT current_database();']
     query = ("Select version(); SELECT current_database();")
+    outputs = []
     try:
         with conn.cursor() as cur:
             for qry in queries:
                 cur.execute(qry)
-            version = cur.fetchall()
-            st.write(pd.DataFrame(version))
+                outputs.append(cur.fetchall())
+            st.write(pd.DataFrame(outputs))
     except (Exception, psycopg2.DatabaseError) as error:
             st.write(error)
     finally:
