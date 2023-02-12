@@ -52,4 +52,4 @@ sets = st.slider("Sets", 0, 30)
 if st.button("Add Data"):
     exercise_data = []
     exercise_data.append({'exercise_date': curdate, "exercise": exercise, "weight_kg": weight_kg, "reps": reps, "sets": sets})
-    st.write(exercise_data)
+    st.write(pd.DataFrame(exercise_data))
