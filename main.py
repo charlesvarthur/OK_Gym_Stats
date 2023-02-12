@@ -57,7 +57,7 @@ def insert_row():
     
     try:
         with conn.cursor() as cur:
-            vals = ','.join(cur.mogrify("(%s,%s,%s,%s,%s)", i).decode('utf-8')
+            vals = ','.join(cur.mogrify("%s,%s,%s,%s,%s", i).decode('utf-8')
             for i in exercise_data)
             cur.execute(sql + vals)
     except (Exception, psycopg2.DatabaseError) as error:
