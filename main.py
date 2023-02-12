@@ -14,16 +14,50 @@ DATABASE_URL = os.environ.get('DATABASE_URL')
 conn = psycopg2.connect(DATABASE_URL, sslmode='require')
 
 def get_version():
+    queries = ['"Select version();','SELECT current_database();']
     query = ("Select version(); SELECT current_database();")
     try:
         with conn.cursor() as cur:
-            cur.execute(query)
+            for qry in queries:
+                cur.execute(query)
             version = cur.fetchall()
             st.write(pd.DataFrame(version))
     except (Exception, psycopg2.DatabaseError) as error:
             st.write(error)
     finally:
             conn.close()
+
+
+def create_tables():
+    create_qry=('''CREATE TABLE IF NOT EXISTS public.exercises(
+                id serial PRIMARY KEY,
+                exercise character varying(50) COLLATE pg_catalog."default" NOT NULL,
+                reps integer NOT NULL,
+                sets integer NOT NULL,
+                weight_kg integer NOT NULL,
+                exercise_date date,
+                CONSTRAINT exercises_pkey PRIMARY KEY (id)
+                )      
+                ''')
+    try:
+        with conn.cursor() as cur:
+            cur.execute(create_qry)
+    except (Exception, psycopg2.DatabaseError) as error:
+            st.write(error)
+    finally:
+            conn.close()   
+
+
+
+
+
+
+
+
+
+
+
+
 
 #Function to read the database ini file and verify that the section for postgresql exists local solution. 
 # @st.experimental_singleton
@@ -92,6 +126,7 @@ sets = st.slider("Sets", 0, 30)
 
 st.subheader('Get DB Version')
 get_version()
+create_tables()
 
 
 # Cache data for later
