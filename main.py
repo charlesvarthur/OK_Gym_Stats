@@ -50,16 +50,15 @@ sets = st.slider("Sets", 0, 30)
 
 #Cache data for later
 def insert_row():
-    sql = ('Insert Into exercise (exercise_date, exercise, weight_kg, reps, sets) VALUES ')
+    sql = ('Insert Into exercise (exercise_date, exercise, weight_kg, reps, sets) VALUES (' + exercise + ',' + reps + ',' + ',' + sets + ','
+            + weight_kg + ',' + curdate + ')')
     exercise_data = []
     exercise_data.append({'exercise_date': curdate, "exercise": exercise, "weight_kg": weight_kg, "reps": reps, "sets": sets})
     st.write(pd.DataFrame(exercise_data))
     
     try:
         with conn.cursor() as cur:
-            vals = ','.join(cur.mogrify("%s,%s,%s,%s,%s", i).decode('utf-8')
-            for i in exercise_data)
-            cur.execute(sql + vals)
+            cur.execute(sql)
     except (Exception, psycopg2.DatabaseError) as error:
             st.write(error)
     finally:
