@@ -90,6 +90,10 @@ weight_kg = st.slider("Weight in KG", 0, 100)
 reps = st.slider("Reps", 0, 50)
 sets = st.slider("Sets", 0, 30)
 
+st.subheader('Get DB Version')
+get_version()
+
+
 # Cache data for later
 # if st.button("Add Data"):
 #     get_data().append({'Date': curdate, "Exercise": exercise, "Weight": weight_kg, "Reps": reps, "Sets": sets})
