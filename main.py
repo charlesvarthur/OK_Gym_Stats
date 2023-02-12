@@ -14,9 +14,9 @@ DATABASE_URL = os.environ.get('DATABASE_URL')
 conn = psycopg2.connect(DATABASE_URL, sslmode='require')
 
 def build():
-    queries = ['Select version();','SELECT current_database();', '''CREATE TABLE IF NOT EXISTS public.exercises(
+    queries = ['Select version();','SELECT current_database();', '''CREATE TABLE IF NOT EXISTS exercises (
                 id serial PRIMARY KEY,
-                exercise character varying(50) COLLATE pg_catalog."default" NOT NULL,
+                exercise varchar(50) NOT NULL,
                 reps integer NOT NULL,
                 sets integer NOT NULL,
                 weight_kg integer NOT NULL,
