@@ -20,7 +20,7 @@ def build():
                 reps integer NOT NULL,
                 sets integer NOT NULL,
                 weight_kg integer NOT NULL,
-                exercise_date date,
+                exercise_date date
                 )      
                 ''']
     outputs = []
