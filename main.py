@@ -19,7 +19,7 @@ def get_version():
     try:
         with conn.cursor() as cur:
             for qry in queries:
-                cur.execute(query)
+                cur.execute(qry)
             version = cur.fetchall()
             st.write(pd.DataFrame(version))
     except (Exception, psycopg2.DatabaseError) as error:
