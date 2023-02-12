@@ -50,7 +50,7 @@ sets = st.slider("Sets", 0, 30)
 
 #Cache data for later
 def insert_row():
-    sql = ('Insert Into exercise (exercise_date, exercise, weight_kg, reps, sets) VALUES ' + vals)
+    sql = ('Insert Into exercise (exercise_date, exercise, weight_kg, reps, sets) VALUES ')
     exercise_data = []
     exercise_data.append({'exercise_date': curdate, "exercise": exercise, "weight_kg": weight_kg, "reps": reps, "sets": sets})
     st.write(pd.DataFrame(exercise_data))
