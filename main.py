@@ -21,7 +21,6 @@ def build():
                 sets integer NOT NULL,
                 weight_kg integer NOT NULL,
                 exercise_date date,
-                CONSTRAINT exercises_pkey PRIMARY KEY (id)
                 )      
                 ''']
     outputs = []
