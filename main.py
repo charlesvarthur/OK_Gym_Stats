@@ -12,6 +12,7 @@ import os
 
 DATABASE_URL = os.environ.get('DATABASE_URL')
 conn = psycopg2.connect(DATABASE_URL, sslmode='require')
+conn.autocommit = True
 
 def build():
     queries = ['Select version();','SELECT current_database();']
@@ -48,8 +49,22 @@ sets = st.slider("Sets", 0, 30)
 
 
 #Cache data for later
-
-if st.button("Add Data"):
+def insert_row():
+    sql = ('Insert Into exercise (exercise_date, exercise, weight_kg, reps, sets) VALUES ' + vals)
     exercise_data = []
     exercise_data.append({'exercise_date': curdate, "exercise": exercise, "weight_kg": weight_kg, "reps": reps, "sets": sets})
     st.write(pd.DataFrame(exercise_data))
+    
+    try:
+        with conn.cursor() as cur:
+            vals = ','.join(cur.mogrify("(%s,%s,%s)", i).decode('utf-8')
+            for i in exercise_data)
+            cur.execute(sql + vals)
+    except (Exception, psycopg2.DatabaseError) as error:
+            st.write(error)
+    finally:
+            conn.commit()
+            conn.close()
+
+if st.button("Add Data"):
+    insert_row()
