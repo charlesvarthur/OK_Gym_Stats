@@ -14,7 +14,7 @@ DATABASE_URL = os.environ.get('DATABASE_URL')
 conn = psycopg2.connect(DATABASE_URL, sslmode='require')
 
 def get_version():
-    query = ("Select version()")
+    query = ("Select version(); SELECT current_database();")
     try:
         with conn.cursor() as cur:
             cur.execute(query)
