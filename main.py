@@ -18,6 +18,8 @@ def get_version():
     try:
         with conn.cursor() as cur:
             cur.execute(query)
+            version = cur.fetchall()
+            st.write(pd.to_datetime(version))
     except (Exception, psycopg2.DatabaseError) as error:
             st.write(error)
     finally:
