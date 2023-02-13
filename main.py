@@ -54,7 +54,7 @@ def insert_row():
     exercise_data.append({'exercise_date': curdate, "exercise": exercise, "weight_kg": weight_kg, "reps": reps, "sets": sets})
     st.write(pd.DataFrame(exercise_data))
     sql = ('Insert Into exercise (exercise_date, exercise, weight_kg, reps, sets) VALUES (%s,%s,%s,%s,%s)' 
-            % (exercise_data[0], exercise_data[1], exercise_data[2], exercise_data[3], exercise_data[4]))
+            % (exercise_data[1], exercise_data[2], exercise_data[3], exercise_data[4], exercise_data[5]))
     # try:
     #     with conn.cursor() as cur:
     #         cur.execute(sql)
