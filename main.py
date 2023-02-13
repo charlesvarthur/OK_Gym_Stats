@@ -55,14 +55,14 @@ def insert_row():
     st.write(pd.DataFrame(exercise_data))
     sql = ('Insert Into exercise (exercise_date, exercise, weight_kg, reps, sets) VALUES (%s,%s,%s,%s,%s)' 
             % (exercise_data[0], exercise_data[1], exercise_data[2], exercise_data[3], exercise_data[4]))
-    try:
-        with conn.cursor() as cur:
-            #cur.execute(sql)
-    except (Exception, psycopg2.DatabaseError) as error:
-            st.write(error)
-    finally:
-            conn.commit()
-            conn.close()
+    # try:
+    #     with conn.cursor() as cur:
+    #         cur.execute(sql)
+    # except (Exception, psycopg2.DatabaseError) as error:
+    #         st.write(error)
+    # finally:
+    #         conn.commit()
+    #         conn.close()
 
 if st.button("Add Data"):
     insert_row()
