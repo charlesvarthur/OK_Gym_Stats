@@ -66,9 +66,7 @@ def insert_row():
         db.close()
 
 #User data inputs
-st.form(key="session_inputs",clear_on_submit=True)
-
-with st.form("session_inputs"):
+with st.form("session_inputs", clear_on_submit=True):
     exercise = st.text_input("Exercise")
     curdate = dt.datetime.today().strftime("%d-%m-%Y")
     weight_kg = st.slider("Weight in KG", 0, 100)
