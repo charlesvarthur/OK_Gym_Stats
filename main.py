@@ -47,9 +47,6 @@ st.header('OK Gym Stats')
 #Opening blurb
 st.write('This is a test page for OK GYM stats.')
 
-#User data inputs
-st.form(key='session_inputs',clear_on_submit=True)
-
 #Cache data for later
 def insert_row():
     exercise_data = []
@@ -68,13 +65,15 @@ def insert_row():
         db.commit()
         db.close()
 
+#User data inputs
+st.form(key="session_inputs",clear_on_submit=True)
+
 with st.form("session_inputs"):
     exercise = st.text_input("Exercise")
     curdate = dt.datetime.today().strftime("%d-%m-%Y")
     weight_kg = st.slider("Weight in KG", 0, 100)
     reps = st.slider("Reps", 0, 50)
     sets = st.slider("Sets", 0, 30)
-
     submitted = st.form_submit_button('Add Data')
     if submitted:
         insert_row()
