@@ -55,10 +55,6 @@ def insert_row():
     st.write(exercise_df)
     try:
         exercise_df.to_sql(name="exercises", con=engine, if_exists='append', index=False, index_label='id')
-        st.empty(exercise)
-        st.empty(weight_kg)
-        st.empty(reps)
-        st.empty(sets)
     except (Exception, psycopg2.DatabaseError) as error:
         st.write(error)
     finally:
