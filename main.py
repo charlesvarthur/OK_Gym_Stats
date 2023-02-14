@@ -11,10 +11,15 @@ import psycopg2
 import os
 from sqlalchemy import create_engine
 
+
 DATABASE_URL = os.environ.get('DATABASE_URL')
+
+if DATABASE_URL.startswith('postgres://'):
+    DATABASE_URL.replace('postgres://', 'postgresql://')
+
+engine = create_engine(DATABASE_URL)
 conn = psycopg2.connect(DATABASE_URL, sslmode='require')
 conn.autocommit = True
-engine=create_engine(os.environ.get('DATABASE_URL'))
 
 
 def build():
