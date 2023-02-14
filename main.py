@@ -71,3 +71,8 @@ with st.form("session_inputs", clear_on_submit=True):
     submitted = st.form_submit_button('Add Data')
     if submitted:
         insert_row()
+
+st.subheader('Data Table')
+
+exercise_dataset = pd.read_sql_table(name="exercises", con=engine,index_col=False)
+st.write(exercise_dataset)
