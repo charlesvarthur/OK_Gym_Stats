@@ -52,7 +52,7 @@ def insert_row():
     exercise_data = []
     exercise_data.append({'exercise_date': curdate, "exercise": exercise, "weight_kg": weight_kg, "reps": reps, "sets": sets})
     exercise_df = pd.DataFrame(exercise_data)
-    st.write(exercise_df)
+    #st.write(exercise_df)
     try:
         exercise_df.to_sql(name="exercises", con=engine, if_exists='append', index=False, index_label='id')
     except (Exception, psycopg2.DatabaseError) as error:
@@ -75,4 +75,5 @@ with st.form("session_inputs", clear_on_submit=True):
 st.subheader('Data Table')
 
 exercise_dataset = pd.read_sql_table(table_name="exercises", con=engine,index_col=False)
+exercise_dataset = exercise_dataset.loc[:,["exercise","curdate","weight_kg","reps","sets"]]
 st.write(exercise_dataset)
