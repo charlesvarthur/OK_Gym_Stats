@@ -12,18 +12,16 @@ import os
 from sqlalchemy import create_engine
 from sqlalchemy.orm import scoped_session, sessionmaker
 
-
+#Database config
 DATABASE_URL = os.environ.get('DATABASE_URL')
-
 if DATABASE_URL.startswith('postgres://'):
     DATABASE_URL=DATABASE_URL.replace('postgres://', 'postgresql://',1)
-
 engine = create_engine(DATABASE_URL)
 conn = psycopg2.connect(DATABASE_URL, sslmode='require')
 conn.autocommit = True
-
 db = scoped_session(sessionmaker(bind=engine))
 
+#Deprecated build test
 def build():
     queries = ['Select version();','SELECT current_database();']
     outputs = []
@@ -39,7 +37,11 @@ def build():
             conn.close()
 
 #Page display config
-st.set_page_config(layout='wide')
+st.set_page_config(page_title="OK Gym Stats",    
+                    page_icon=":bar_chart:",
+                    layout="wide"
+                    )
+
 
 #Header
 st.header('OK Gym Stats')
