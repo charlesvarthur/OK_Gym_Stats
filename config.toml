@@ -76,12 +76,6 @@ port = 80
 # Default: true
 enableCORS = false
 
-[theme]
-primaryColor="purple"
-backgroundColor="#0E1117"
-secondaryBackgroundColor="#purple"
-textColor="#purple"
-font="sans serif"
 
 [browser]
 
