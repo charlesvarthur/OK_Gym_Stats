@@ -75,5 +75,5 @@ with st.form("session_inputs", clear_on_submit=True):
 st.subheader('Data Table')
 
 exercise_dataset = pd.read_sql_table(table_name="exercises", con=engine,index_col=False)
-exercise_dataset = exercise_dataset.loc[:,["exercise","curdate","weight_kg","reps","sets"]]
+exercise_dataset = exercise_dataset.loc[:,["exercise","exercise_date","weight_kg","reps","sets"]]
 st.write(exercise_dataset)
