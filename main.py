@@ -57,7 +57,7 @@ def insert_row():
     sql = ('Insert Into exercise (exercise_date, exercise, weight_kg, reps, sets) VALUES (%s,%s,%d,%d,%d)' 
             % (exercise_df['exercise_date'], exercise_df['exercise'], exercise_df['weight_kg'], exercise_df['reps'], exercise_df['sets']))
     try:
-        for i in exercise_df:
+        for i in exercise_df.index:
             with conn.cursor() as cur:
                 cur.execute(sql)
     except (Exception, psycopg2.DatabaseError) as error:
