@@ -79,8 +79,8 @@ enableCORS = false
 [theme]
 primaryColor="purple"
 backgroundColor="#0E1117"
-secondaryBackgroundColor="#262730"
-textColor="#FAFAFA"
+secondaryBackgroundColor="#purple"
+textColor="#purple"
 font="sans serif"
 
 [browser]
