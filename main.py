@@ -39,7 +39,7 @@ st.write('This is a test page for OK GYM stats.')
 
 #User data inputs
 exercise = st.text_input("Exercise")
-curdate = dt.datetime.now()
+curdate = dt.datetime.now().strftime("%d-%m-%Y")
 weight_kg = st.slider("Weight in KG", 0, 100)
 reps = st.slider("Reps", 0, 50)
 sets = st.slider("Sets", 0, 30)
@@ -54,7 +54,7 @@ def insert_row():
     exercise_data.append({'exercise_date': curdate, "exercise": exercise, "weight_kg": weight_kg, "reps": reps, "sets": sets})
     exercise_df = pd.DataFrame(exercise_data)
     st.write(exercise_df)
-    sql = ('Insert Into exercise (exercise_date, exercise, weight_kg, reps, sets) VALUES (%s,%s,%s,%s,%s)' 
+    sql = ('Insert Into exercise (exercise_date, exercise, weight_kg, reps, sets) VALUES (%s,%s,%d,%d,%d)' 
             % (exercise_df['exercise_date'], exercise_df['exercise'], exercise_df['weight_kg'], exercise_df['reps'], exercise_df['sets']))
     try:
         for i in exercise_df:
