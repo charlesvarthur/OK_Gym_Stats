@@ -16,7 +16,7 @@ from sqlalchemy.orm import scoped_session, sessionmaker
 DATABASE_URL = os.environ.get('DATABASE_URL')
 
 if DATABASE_URL.startswith('postgres://'):
-    DATABASE_URL.replace('postgres://', 'postgresql://')
+    DATABASE_URL=DATABASE_URL.replace('postgres://', 'postgresql://',1)
 
 engine = create_engine(DATABASE_URL)
 conn = psycopg2.connect(DATABASE_URL, sslmode='require')
@@ -49,7 +49,7 @@ st.write('This is a test page for OK GYM stats.')
 
 #User data inputs
 exercise = st.text_input("Exercise")
-curdate = dt.datetime.now().strftime("%d-%m-%Y")
+curdate = dt.datetime.today().strftime("%d-%m-%Y")
 weight_kg = st.slider("Weight in KG", 0, 100)
 reps = st.slider("Reps", 0, 50)
 sets = st.slider("Sets", 0, 30)

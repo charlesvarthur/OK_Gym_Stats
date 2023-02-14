@@ -29,7 +29,7 @@ def build():
 
 #User data inputs
 exercise = "Arms"
-curdate = dt.datetime.now().strftime("%d-%m-%Y")
+curdate = dt.datetime.today().strftime("%d-%m-%Y")
 weight_kg = 10
 reps = 30
 sets = 40
