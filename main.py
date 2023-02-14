@@ -10,6 +10,7 @@ import datetime as dt
 import psycopg2
 import os
 from sqlalchemy import create_engine
+from sqlalchemy.orm import scoped_session, sessionmaker
 
 
 DATABASE_URL = os.environ.get('DATABASE_URL')
@@ -21,6 +22,7 @@ engine = create_engine(DATABASE_URL)
 conn = psycopg2.connect(DATABASE_URL, sslmode='require')
 conn.autocommit = True
 
+db = scoped_session(sessionmaker(bind=engine))
 
 def build():
     queries = ['Select version();','SELECT current_database();']
@@ -67,8 +69,8 @@ def insert_row():
     except (Exception, psycopg2.DatabaseError) as error:
         st.write(error)
     finally:
-        conn.commit()
-        conn.close()
+        db.commit()
+        db.close()
 
 if st.button("Add Data"):
     insert_row()
